@@ -12,10 +12,11 @@ namespace TaxCalculator.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private ApplicationContext _applicationContext;
+        public HomeController(ILogger<HomeController> logger,ApplicationContext databaseContext)
         {
             _logger = logger;
+            _applicationContext = databaseContext;
         }
 
         public IActionResult Index()
@@ -23,9 +24,9 @@ namespace TaxCalculator.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult NewThresholds()
         {
-            return View();
+            return View(_applicationContext.Thresholds.ToList());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

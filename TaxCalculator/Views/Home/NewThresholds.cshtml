@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Threshold>
+@{
+    ViewData["Title"] = "Tax thresholds";
+}
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <tr>
+        <td>Id of threshold:</td><td>Tax income not over ($):</td><td>State marginal rate (%):</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ThresholdId</td><td>@item.Value $</td><td>@item.Percent %</td>
+        </tr>
+    }
+</table>
