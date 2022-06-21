@@ -1,8 +1,27 @@
-﻿@{
+﻿@model IEnumerable<Threshold>
+
+@{
+    List<Threshold> thresholds = Model.ToList();
+}
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Calculate your state taxes:</h1>
+    <form>
+        <label class="control-label">Input value of income:</label>
+        <input id="income-value" type="number" class="form-control"/>
+        <input type="submit" value="Calculate"/><br/>
+    </form>
 </div>
+@* <script> *@
+@*     function functionGetTax(){ *@
+@*         onclick=((e)=>{ *@
+@*         e.preventDefault(); *@
+@*             let income = document.getElementById("income-value"); *@
+@*              *@
+@*         }) *@
+@*     } *@
+@* </script> *@

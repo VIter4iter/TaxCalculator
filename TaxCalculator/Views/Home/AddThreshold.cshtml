@@ -1,0 +1,15 @@
+@model Threshold
+
+<form asp-action="AddThreshold" asp-controller="Home">
+    <div class="form-group">
+        <label asp-for="Value" class="control-label">Max value of income:</label>
+        <input type="text" asp-for="Value" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Percent" class="control-label">Percent in current range:</label>
+        <input type="number" asp-for="Percent" class="form-control" />
+    </div>
+    <button class="form-group">
+        <input type="submit" value="Add threshold" class="btn btn-default" />
+    </button>
+</form>

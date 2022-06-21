@@ -19,16 +19,44 @@ namespace TaxCalculator.Controllers
             _applicationContext = databaseContext;
         }
 
+        // public IActionResult Index()
+        // {
+        //     return View();
+        // }
+        
         public IActionResult Index()
+        {
+            return View(_applicationContext.Thresholds.ToList());
+        }
+        
+        
+        public IActionResult Thresholds()
+        {
+            return View(_applicationContext.Thresholds.ToList());
+        }
+        
+        [HttpGet]
+        public IActionResult AddThreshold()
         {
             return View();
         }
 
-        public IActionResult NewThresholds()
+        [HttpPost]
+        public async Task<IActionResult> AddThreshold(Threshold threshold)
         {
-            return View(_applicationContext.Thresholds.ToList());
+            _applicationContext.Thresholds.Add(threshold);
+            await _applicationContext.SaveChangesAsync();
+            return RedirectToAction("Thresholds");
         }
-
+        
+        [HttpPost]
+        public async Task<IActionResult> DeleteThreshold(int id)
+        {
+            _applicationContext.Thresholds.Remove(_applicationContext.Thresholds.Find(id));
+            await _applicationContext.SaveChangesAsync();
+            return RedirectToAction("Thresholds");
+        }
+        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
