@@ -1,27 +1,11 @@
 ﻿@model IEnumerable<Threshold>
 
-@{
-    List<Threshold> thresholds = Model.ToList();
-}
-
-@{
-    ViewData["Title"] = "Home Page";
-}
-
 <div class="text-center">
     <h1 class="display-4">Calculate your state taxes:</h1>
-    <form>
+    <form id="calculate-tax" asp-action="CalculateTax" asp-controller="Home" >
         <label class="control-label">Input value of income:</label>
-        <input id="income-value" type="number" class="form-control"/>
+        <input id="income-value" name="income"  type="number" class="form-control"/>
         <input type="submit" value="Calculate"/><br/>
     </form>
+    <label id="result"></label>
 </div>
-@* <script> *@
-@*     function functionGetTax(){ *@
-@*         onclick=((e)=>{ *@
-@*         e.preventDefault(); *@
-@*             let income = document.getElementById("income-value"); *@
-@*              *@
-@*         }) *@
-@*     } *@
-@* </script> *@

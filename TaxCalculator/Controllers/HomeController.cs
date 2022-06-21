@@ -28,7 +28,20 @@ namespace TaxCalculator.Controllers
         {
             return View(_applicationContext.Thresholds.ToList());
         }
-        
+
+        [HttpPost]
+        public async Task<string> CalculateTax(long income)
+        {
+            // List<Threshold> thresholds = _applicationContext.Thresholds.ToList();
+            // for (int i = 0; i < thresholds.Count; ++i)
+            // {
+            //     if (i == 0)
+            //     {
+            //         
+            //     }
+            // }
+            return income.ToString();
+        }
         
         public IActionResult Thresholds()
         {
