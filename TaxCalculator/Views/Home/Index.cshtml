@@ -5,7 +5,9 @@
     <form id="calculate-tax" asp-action="CalculateTax" asp-controller="Home" >
         <label class="control-label">Input value of income:</label>
         <input id="income-value" name="income"  type="number" class="form-control"/>
-        <input type="submit" value="Calculate"/><br/>
+        <input class="buttons" type="submit" value="Calculate"/>
+        
     </form>
     <label id="result"></label>
+    <label id="percent-result"></label>
 </div>

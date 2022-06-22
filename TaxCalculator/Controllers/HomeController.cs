@@ -6,17 +6,19 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using TaxCalculator.Models;
+using TaxCalculator.Services;
 
 namespace TaxCalculator.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private ApplicationContext _applicationContext;
-        public HomeController(ILogger<HomeController> logger,ApplicationContext databaseContext)
+        private ApplicationContext _context;
+        private TaxService _taxService;
+        public HomeController(ApplicationContext context )
         {
-            _logger = logger;
-            _applicationContext = databaseContext;
+            _context = context;
+            _taxService = new TaxService(context);;
         }
 
         // public IActionResult Index()
@@ -26,26 +28,20 @@ namespace TaxCalculator.Controllers
         
         public IActionResult Index()
         {
-            return View(_applicationContext.Thresholds.ToList());
+            return View(_context.Thresholds.ToList());
         }
 
         [HttpPost]
-        public async Task<string> CalculateTax(long income)
+        public async Task<string> CalculateTax(int income)
         {
-            // List<Threshold> thresholds = _applicationContext.Thresholds.ToList();
-            // for (int i = 0; i < thresholds.Count; ++i)
-            // {
-            //     if (i == 0)
-            //     {
-            //         
-            //     }
-            // }
-            return income.ToString();
+            double result = _taxService.CalculateTax(income);
+            return String.Format($"Your taxes is: {result:f2} $ which is" +
+                                 $": {result/income*100:f1} % of your income.") ;
         }
         
         public IActionResult Thresholds()
         {
-            return View(_applicationContext.Thresholds.ToList());
+            return View(_context.Thresholds.ToList());
         }
         
         [HttpGet]
@@ -57,16 +53,16 @@ namespace TaxCalculator.Controllers
         [HttpPost]
         public async Task<IActionResult> AddThreshold(Threshold threshold)
         {
-            _applicationContext.Thresholds.Add(threshold);
-            await _applicationContext.SaveChangesAsync();
+            _context.Thresholds.Add(threshold);
+            await _context.SaveChangesAsync();
             return RedirectToAction("Thresholds");
         }
         
         [HttpPost]
         public async Task<IActionResult> DeleteThreshold(int id)
         {
-            _applicationContext.Thresholds.Remove(_applicationContext.Thresholds.Find(id));
-            await _applicationContext.SaveChangesAsync();
+            _context.Thresholds.Remove(_context.Thresholds.Find(id));
+            await _context.SaveChangesAsync();
             return RedirectToAction("Thresholds");
         }
         

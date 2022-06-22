@@ -1,6 +1,6 @@
 ﻿$('#calculate-tax').submit(function (e) {
     e.preventDefault();
-    var message = document.getElementById("result");
+    let message = document.getElementById("result");
     const incomeValue = document.getElementById("income-value");
     let pattern = /[0-9]/
     if(!pattern.test(incomeValue.value)){

@@ -6,22 +6,22 @@
 
 <table class="table">
     <tr>
-        <td>Id of threshold:</td><td>Tax income not over ($):</td><td>State marginal rate (%):</td>
+        <td>Tax income not over ($):</td><td>State marginal rate (%):</td><td>Delete threshold:</td>
     </tr>
     @foreach (var item in Model)
     {
         <tr>
-            <td>@item.ThresholdId</td>
             <td>@item.Value $</td>
             <td>@item.Percent %</td>
             <td><form asp-controller="Home" asp-action="DeleteThreshold" asp-route-id="@item.ThresholdId">
                     <div class="form-group">
-                        <input type="submit" value="Delete threshold"/>
+                        <input class="buttons" type="submit" value="Delete threshold"/>
                     </div>
                 </form>
             </td>
         </tr>
     }
 </table>
-
-<a asp-action="AddThreshold">Add threshold</a>
+<div id="button-add-threshold" class="buttons">
+    <a asp-action="AddThreshold">Add threshold</a>
+</div>
